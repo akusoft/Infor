@@ -3,40 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Infor"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:model="clr-namespace:Infor.model"
         xmlns:converter="clr-namespace:Infor.converter"
+        xmlns:mdixWindow="clr-namespace:Infor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Style="{StaticResource MaterialDesignWindow}"
+        Title="Infor" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"
+        mdixWindow:WindowEx.ShowMinimizeButton="True"
+        mdixWindow:WindowEx.ShowMaximizeButton="True"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{materialDesign:MaterialDesignFont}"
         d:DataContext="{d:DesignInstance Type={x:Type model:MainWindowViewModel}}">
-    <Window.Resources>
-        <converter:VisualToImageSourceConverter x:Key="VisualToImageSourceConverter" />
-    </Window.Resources>
-    <Window.Icon>
-        <Binding Converter="{StaticResource VisualToImageSourceConverter}">
-            <Binding.Source>
-                <materialDesign:PackIcon Kind="Pool" Width="30" Height="30" Foreground="PeachPuff" />
-            </Binding.Source>
-        </Binding>
-    </Window.Icon>
-    <DockPanel>
-        <Grid DockPanel.Dock="Top">
-            <Button Content="导出Excel" Command="{Binding OpenDirectoryCommand}"/>
+    <mdixWindow:MaterialDesignWindow.HeaderContent>
+        <Grid>
+            <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" HorizontalAlignment="Left" WindowChrome.IsHitTestVisibleInChrome="True" 
+                          x:Name="MenuToggleButton" />
+            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center" />
         </Grid>
-        <Grid DockPanel.Dock="Bottom">
-            <DataGrid ItemsSource="{Binding Info}" 
-                      IsReadOnly="True"/>
-        </Grid>
-        <materialDesign:Snackbar MessageQueue="{Binding BoundMessageQueue}" 
-                     x:Name="Snackbar"
-                     HorizontalAlignment="Stretch"/>
-    </DockPanel>
+
+    </mdixWindow:MaterialDesignWindow.HeaderContent>
+    
+    <Window.Content>
+        <DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <Button Content="导出Excel" Command="{Binding OpenDirectoryCommand}"/>
+            </Grid>
+            <Grid DockPanel.Dock="Bottom">
+                <DataGrid ItemsSource="{Binding Info}" 
+                          IsReadOnly="True"/>
+            </Grid>
+            <materialDesign:Snackbar MessageQueue="{Binding BoundMessageQueue}" 
+                                     x:Name="Snackbar"
+                                     HorizontalAlignment="Stretch"/>
+        </DockPanel>
+    </Window.Content>
 </Window>

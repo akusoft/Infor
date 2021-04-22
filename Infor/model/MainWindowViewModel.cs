@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using MaterialDesignThemes.Wpf;
 using MiniExcelLibs;
 using MyConsole.dao;
 using MyConsole.domain;
-using WPFDialogs;
-using XLabs;
+using TAlex.WPF.CommonDialogs;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Infor.model
 {

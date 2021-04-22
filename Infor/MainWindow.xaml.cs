@@ -25,6 +25,7 @@ namespace Infor
         
         public MainWindow()
         {
+            MaterialDesignWindow.RegisterCommands(this);
             DataContext = ViewModel = new MainWindowViewModel();
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
